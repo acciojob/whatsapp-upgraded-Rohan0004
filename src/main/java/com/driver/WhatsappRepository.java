@@ -19,9 +19,9 @@ public class WhatsappRepository {
     private int customGroupCount=1;
     private int messageId=1;
 
-    private HashMap<Group, List<Message>> groupMessageDB;
+    private HashMap<Group, List<Message>> groupMessageDB=new HashMap<>();
 
-    private HashMap<Message, User> senderDB;
+    private HashMap<Message, User> senderDB=new HashMap<>();
 
 
     public boolean createUser(String name, String mobile) {
