@@ -2,10 +2,7 @@ package com.driver;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class WhatsappRepository {
@@ -89,5 +86,21 @@ public class WhatsappRepository {
             }
         }
         throw new Exception("User not found");
+    }
+
+    public String findMessage(Date start, Date end, int k) throws Exception {
+        List<Message> messages=new ArrayList<>();
+        for (Message msg:senderDB.keySet()) {
+            if (start.before(msg.getTimestamp()) && end.after(msg.getTimestamp())) messages.add(msg);
+        }
+
+        if (k>messages.size()) throw new Exception("K is greater than the number of messages");
+
+        Collections.sort(messages,(a, b)->{
+            if(a.getTimestamp().before(b.getTimestamp())) return -1;
+            return 1;
+        });
+
+        return messages.get(messages.size()-k).toString();
     }
 }
