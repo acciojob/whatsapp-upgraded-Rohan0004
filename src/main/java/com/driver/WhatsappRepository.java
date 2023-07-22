@@ -59,6 +59,7 @@ public class WhatsappRepository {
         List<Message> msg = groupMessageDB.getOrDefault(group,new ArrayList<>());
         msg.add(message);
         groupMessageDB.put(group,msg);
+        senderDB.put(message,sender);
         return msg.size();
     }
 
